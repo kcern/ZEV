@@ -1,5 +1,5 @@
-#desktop
-"""EV_Chargers_Code.py by Kennan Cronen
+"""
+EV_Chargers_Code.py by Kennan Cronen
 Power a map of charging stations around the country
 
 TODO: Create a quality database of regulations: 
