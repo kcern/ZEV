@@ -7,9 +7,6 @@ http://developer.nrel.gov/docs/transportation/transportation-incentives-laws-v1/
 """
 
 def main():
-	#test program
-	print("Program is working")
-	
 	#import stuff
 	import requests
 	import gmplot
@@ -42,17 +39,12 @@ def main():
 		)
 	data = response.json()
 	fuel_stations = data.get("fuel_stations")
-	
-	
-	#print(type(data))
-	#print(data)
-	#print(data.get("fuel_stations"))
+		
 	#print(type(fuel_stations))
-	print(str(data["total_results"]) + " Total Fuel Stations **************************")
-
+	print(str(data["total_results"]) + " Total Fuel Stations")
 
 	#############################################################
-	#Get Map data
+	#Get Location Data and Create Map
 	#############################################################
 
 	Locations = [( float(i.get("latitude")),float(i.get("longitude"))) for i in fuel_stations]
@@ -60,26 +52,14 @@ def main():
 	lats = [float(i.get("latitude")) for i in fuel_stations]
 	lngs = [float(i.get("longitude")) for i in fuel_stations]
 	
-
-	
-	# gmaps
-	"""gmap = gmplot.GoogleMapPlotter(0, 0, 2)
-	gmaps.heatmap(Locations)
-	gmap.draw("Earthquake_heatmap.html")
-	"""
-
-
+	#Center Map in CA
 	gmap = gmplot.GoogleMapPlotter(38.58431244, -121.4956055, 6)
 
 	#gmap.plot(lats, lngs, 'cornflowerblue', edge_width=10)
 	gmap.scatter(lats, lngs, '#3B0B39', size=40, marker=False)
 	gmap.scatter(lats, lngs, 'k', marker=True)
 	gmap.heatmap(lats, lngs)
-
 	gmap.draw("Kennan_EV.html")
-
-
-
 	
 	"""
 	nearest station URL Query
@@ -88,34 +68,7 @@ def main():
 	#nearest_station_data = nearest_station.json()	
 	#print(type(nearest_station_data))
 	#print(nearest_station_data)
-	
-
-	# Print the status code of the response.
-
-
-	"""
-	gmap = gmplot.GoogleMapPlotter(37.428, -122.145, 16)
-
-	gmap.plot(latitudes, longitudes, 'cornflowerblue', edge_width=10)
-	gmap.scatter(more_lats, more_lngs, '#3B0B39', size=40, marker=False)
-	gmap.scatter(marker_lats, marker_lngs, 'k', marker=True)
-	gmap.heatmap(heat_lats, heat_lngs)
-
-	gmap.draw("mymap.html")
-	"""	
-
-	
-	"""
-	TEST CODE BELOW
-	parameters = {"lat": 37.78, "lon": -122.41}
-	response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
-
-	# Get the response data as a python object.  Verify that it's a dictionary.
-	data = response.json()
-	print(type(data))
-	print(data)
-	"""
-
+	#Print the status code of the response.
 
 if __name__ == '__main__':
 	main()
